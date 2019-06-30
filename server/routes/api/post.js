@@ -1,6 +1,11 @@
-const Hub = require("mongoose").model("Hub");
-const Post = require('mongoose').model('Post')
-const router = require("express").Router();
-const passport = require("passport");
+const router = require('express').Router();
+const postController = require('../../controllers/post');
+const passport = require('passport');
 
-//router.get('/hub/:name/')
+router.get('/', postController.getPosts);
+
+router.get('/:postID', postController.getPost)
+
+router.post('/', passport.authenticate('jwt'), postController.submitPost)
+module.exports = router;
+

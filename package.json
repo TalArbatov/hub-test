@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev-server": "webpack-dev-server",
     "start:client": "webpack --watch",
-    "start:server": "nodemon server/app",
+    "start:server": "nodemon server/server",
     "start:db": "mongod --dbpath=\"C:/Users/Tal Arbatov/mongo-data\""
   },
   "repository": {
@@ -33,6 +33,7 @@
     "babel-loader": "^8.0.6",
     "bcrypt": "^3.0.6",
     "bcrypt-nodejs": "0.0.3",
+    "chalkify": "^1.0.12",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
@@ -41,6 +42,7 @@
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
@@ -58,6 +60,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2",
+    "swearjar": "^0.2.0",
     "unique-names-generator": "^3.0.0",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",

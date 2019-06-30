@@ -33,9 +33,10 @@ applyMiddlewares(app);
 
 const PORT = config.port;
 
-http.createServer(app).listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`)
-})
+app.set('port', PORT);
+
+
+module.exports = app;
 
 //app.listen()
 

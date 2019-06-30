@@ -4,7 +4,7 @@ const User = require('mongoose').model("User");
 const hubAuthentication = require('../../helpers/authHelper').hubAuthentication
 const router = require("express").Router();
 const passport = require("passport");
-
+const hubController = require('../../controllers/hub')
 
 // GET / gets list of all hubs
 // GET /:hub gets single hub by name
@@ -24,15 +24,7 @@ const passport = require("passport");
 
 //middleware for hubs
 
-const hubMiddleware = async (req,res,next) => {
-  const hubName = req.params.hub;
-  console.log(hubName)
-  const currentHub = await Hub.findOne({name: hubName}).populate('subscribers').populate('admin')
-  if(!currentHub)
-    return res.status(409).send('Cannot find specified Hub');
-  req.hub = currentHub;
-  next()
-}
+
 
 
 // =====
@@ -40,59 +32,19 @@ const hubMiddleware = async (req,res,next) => {
 // =====
 
 // get list of all hubs
-router.get("/", async (req, res, next) => {
-  const hubs = await Hub.find({});
-  if (hubs) res.send(hubs);
-  res.sendStatus(500);
-});
+router.get("/", hubController.getHubs);
 
 
 // create a new hub
-router.post("/", passport.authenticate("jwt"), async (req, res, next) => {
-  const { name, description, privacy } = req.body;
-
-  //validate name, desc
-
-  const existingHub = await Hub.findOne({ name });
-  if (existingHub) res.status(409).send("Existing Hub");
-  else {
-    const newHub = new Hub({
-      admin: req.user._id,
-      dateCreated: Date.now(),
-      name,
-      description,
-      privacy,
-      moderators: [],
-      posts: [],
-      subscribers: []
-    });
-    newHub.save((err, hub) => {
-      if (err) res.status(500).send(err);
-      res.send(hub);
-    });
-  }
-});
+router.post("/", passport.authenticate("jwt"), hubController.createHub);
 
 // get specific hub by name
-router.get("/:hub",hubMiddleware, async (req, res, next) => {
-  return res.send(req.hub)
-});
-
+router.get("/:hub", hubController.middleware, hubController.getHub);
 
 
 // subscribe to hub
-router.get('/:hub/subscribe',passport.authenticate('jwt'), hubMiddleware,  (req,res,next) => {
-  const hub = req.hub;
-  const user = req.user;
-  User.findByIdAndUpdate(user._id, {$push: {subscription: hub._id}}, err => err && res.sendStatus(500))
-  Hub.findByIdAndUpdate(hub._id, {$push: {subscribers: user._id}}, err => err && res.sendStatus(500))
-  res.sendStatus(200)
-})
-router.get('/:hub/unsubscribe',passport.authenticate('jwt'), hubMiddleware,  (req,res,next) => {
-  const hub = req.hub;
-  const user = req.user;
-  User.findByIdAndUpdate(user._id, {$pull: {subscription: hub._id}}, (err) => err && res.sendStatus(500))
-  Hub.findByIdAndUpdate(hub._id, {$pull: {subscribers: user._id}}, (err) => err && res.sendStatus(500))
-  res.sendStatus(200)
-})
+router.get('/:hub/subscribe',passport.authenticate('jwt'), hubController.middleware,  hubController.subscribe)
+
+// unsubsribe to hub
+router.get('/:hub/unsubscribe',passport.authenticate('jwt'), hubController.middleware, hubController.unsubscribe)
 module.exports = router;

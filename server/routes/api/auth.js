@@ -3,6 +3,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const config = require("../../../config");
 const User = require("mongoose").model("User");
+const authController = require('../../controllers/auth');
 
 const secret = config.JWTsecret;
 
@@ -36,18 +37,7 @@ router.post(
   })
 );
 
-router.get("/local-login-success", (req, res) => {
-  //passport handler attachtest req.user
-  const user = {
-    _id: req.user._id
-    //email: req.user.email
-  };
-  const secret = config.JWTsecret;
-  jwt.sign(user, secret, { expiresIn: config.JWTexp }, (err, token) => {
-    if (err) res.status(501);
-    else res.send(token);
-  });
-});
+router.get("/local-login-success", authController.localSignupSuccess)
 
 router.get("/local-login-failure", (req, res) => {
   res.sendStatus(403);
@@ -59,7 +49,12 @@ router.get("/protected", require("../../middlewares/checkJWT"), (req, res, next)
 router.get("/protected2", passport.authenticate("jwt"), (req, res, next) => {
   res.send("success!2");
 });
-
+router.get("/error", (req, res, next) => {
+  const error = new Error("user unauthorized");
+  setImmediate(() => {
+    next(error)
+  })
+});
 // router.get("/facebook", passport.authenticate("facebook"));
 
 // router.get(
@@ -141,7 +136,7 @@ router.get("/me/from/token", (req, res, next) => {
           _id: user._id
         };
         //sends a new, refreshed token
-        jwt.sign(cleanUser, secret, { expiresIn: 60 * 30  }, (err, token) => {
+        jwt.sign(cleanUser, secret, { expiresIn: 60 * 30 }, (err, token) => {
           if (err) res.sendStatus(401);
           else res.send({ token, user });
         });

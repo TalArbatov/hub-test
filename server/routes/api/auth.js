@@ -21,7 +21,7 @@ router.post(
 );
 
 router.get("/local-signup-failure", (req, res, next) => {
-  res.send(req.flash("error")[0]);
+  res.status(400).send(req.flash("error")[0]);
 });
 
 router.get("/local-signup-success", (req, res, next) => {
@@ -37,7 +37,9 @@ router.post(
   })
 );
 
-router.get("/local-login-success", authController.localSignupSuccess)
+router.post('/signup', authController.localSignup)
+
+router.get("/local-login-success", authController.localLoginSuccess)
 
 router.get("/local-login-failure", (req, res) => {
   res.sendStatus(401);

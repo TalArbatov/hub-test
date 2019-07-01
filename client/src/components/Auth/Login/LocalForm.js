@@ -13,64 +13,62 @@ a {
   font-size:0.9em
   font-weight:500;
 }
-`
+`;
 
 const SubmitButton = styled.button`
-  cursor:pointer;
-  height:30px;
-  border-radius:20px;
-  background:white;
-  color:#1ECD97;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:4px 20px; 
-  margin:10px;
-  font-family:Gisha;
-  border: 2px solid #1ECD97;
-  transition:0.3s;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 20px;
+  background: white;
+  color: #1ecd97;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 20px;
+  margin: 10px;
+  font-family: Gisha;
+  border: 2px solid #1ecd97;
+  transition: 0.3s;
   &:hover {
-    background: #1ECD97;
+    background: #1ecd97;
     color: white;
-
   }
-`
+`;
 
 const LocalForm = props => {
   const { classes } = props;
 
-return(
+  return (
     <form onSubmit={props.onSubmit}>
-    <div>
-      <TextField
-        label="Email"
-        margin="normal"
-        variant="outlined"
-       name="email"
-       onChange={props.changeForm}
-        classes={{ root: classes.inputs }}
-      />
-    </div>
-    <div>
-      <TextField
-        type="password"
-        label="Password"
-        margin="normal"
-        variant="outlined"
-        name="password"
-        onChange={props.changeForm}
-        classes={{ root: classes.inputs }}
-      />
-    </div>
-    <SubmitDiv>
-      <SubmitButton type="submit">
-        Submit
-      </SubmitButton>
+      <div>
+        <TextField
+          label="Email"
+          margin="normal"
+          variant="outlined"
+          name="email"
+          onChange={props.changeForm}
+          classes={{ root: classes.inputs }}
+        />
+      </div>
+      <div>
+        <TextField
+          type="password"
+          label="Password"
+          margin="normal"
+          variant="outlined"
+          name="password"
+          onChange={props.changeForm}
+          classes={{ root: classes.inputs }}
+        />
+      </div>
+      <SubmitDiv>
+        <SubmitButton type="submit">Submit</SubmitButton>
 
-      <a href="#">Forgot your password?</a>
-    </SubmitDiv>
-  </form>
-)
+        <a href="#">Forgot your password?</a>
+      </SubmitDiv>
+      <p style={{ color: "red", textAlign: "center" }}>{props.response}</p>
+    </form>
+  );
 };
 const styles = {
   inputs: {

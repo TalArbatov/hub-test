@@ -1,37 +1,46 @@
-import React, {useEffect,useState} from 'react';
-import axios from 'axios';
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import {signup} from '../../actions/actionCreators/auth';
 const Signup = props => {
   const [getState, setState] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: ""
+  });
 
-  const changeForm = (e) => {
-    setState({...getState, [e.target.name]: e.target.value})
-  }
+  const changeForm = e => {
+    setState({ ...getState, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = e => {
-    e.preventDefault()
-    axios.post('/api/auth/local-signup', getState).then(res => {
-      console.log(res.data)
-    })
-  }
+    props.signup(getState)
+    e.preventDefault();
+  };
 
-  return(
+  return (
     <div>
       <h1>Signup:</h1>
       <form onSubmit={onSubmit}>
-      <label>email:</label>
-      <input type='text' name='email' onChange={changeForm}></input>
+        <label>email:</label>
+        <input type="text" name="email" onChange={changeForm} />
 
-      <label>password:</label>
-      <input type='password' name='password' onChange={changeForm}></input>
+        <label>password:</label>
+        <input type="password" name="password" onChange={changeForm} />
 
-      <button type='submit'>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+const mapStateToProps = state => {
+  return {
+    authReducer: state.authReducer
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    signup: form => dispatch(signup(form))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

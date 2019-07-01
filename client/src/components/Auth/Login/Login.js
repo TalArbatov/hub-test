@@ -8,19 +8,24 @@ import LocalForm from "./LocalForm";
 import {push} from 'connected-react-router'
 import { connect } from "react-redux";
 import {login} from '../../../actions/actionCreators/auth'
+import {Link} from 'react-router-dom';
+
 const Login = props => {
   const [getState, setState] = useState({
     email: "",
-    password: ""
+    password: "",
+    response: ''
   });
 
   const changeForm = e => {
     setState({ ...getState, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
-    props.login(getState)
+    const response = await props.login(getState);
+    if(response)
+      setState({...getState, response})
   };
 
   const facebookResponse = response => {
@@ -56,9 +61,12 @@ const Login = props => {
         <div>
           <LoginTitle>Login</LoginTitle>
         </div>
-        <LocalForm onSubmit={onSubmit} changeForm={changeForm} />
+        <LocalForm onSubmit={onSubmit} changeForm={changeForm} response={getState.response}/>
         <FacebookComponent response={facebookResponse} />
         <GoogleComponent response={googleResponse} failure={onGoogleFailure} />
+        <div>
+          <p>Don't have an account? <Link to='/signup'>Signup!</Link></p>
+        </div>
         <button
         onClick={() => {
         props.push("/after-login");

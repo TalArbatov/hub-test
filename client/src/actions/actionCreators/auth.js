@@ -8,16 +8,19 @@ export const login = form => {
     dispatch({
       type: TYPES.LOCAL_LOGIN_REQUEST
     });
-    axios
+    return axios
       .post("/api/auth/local-login", form)
       .then(res => {
+        //on success, get token and user as response
         console.log(res.data);
-        setAuthorizationToken(res.data);
-        dispatch(loginSuccess());
-        dispatch(push('/after-login'))
+        const { token, user } = res.data;
+        setAuthorizationToken(token);
+        dispatch(loginSuccess(user));
+        dispatch(push("/after-login"));
       })
       .catch(err => {
-        console.log(err);
+        if (err.response && err.response.status)
+          if (err.response.status === 401) return "Wrong username or password";
         dispatch({
           type: TYPES.LOCAL_LOGIN_ERROR
         });
@@ -29,5 +32,16 @@ const loginSuccess = user => {
   return {
     type: TYPES.LOCAL_LOGIN_SUCCESS,
     payload: user
+  };
+};
+
+export const signup = form => {
+  return dispatch => {
+    dispatch({
+      type: TYPES.SIGNUP_REQUEST
+    });
+    return axios.post("/api/auth/local-signup", form).then(res => {
+      console.log(res.data);
+    });
   };
 };

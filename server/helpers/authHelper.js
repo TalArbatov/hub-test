@@ -10,13 +10,13 @@ const hubAuthentication = async (req,res,next) => {
   const user = req.user; 
   const currentHub = await Hub.findOne({name: hubName})
   if(!currentHub) {
-    return res.status(401).send('Hub non existent')
+    return res.status(400).send('Hub non existent')
   }
   const isSubscriber = currentHub.subscribers.find(subscriber => {
     return subscriber._id === user._id
   })
   if(!isSubscriber)
-    return res.status(401).send('User not a subscriber');
+    return res.status(400).send('User not a subscriber');
   else {
     next()
   }

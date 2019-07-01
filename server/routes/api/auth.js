@@ -40,7 +40,7 @@ router.post(
 router.get("/local-login-success", authController.localSignupSuccess)
 
 router.get("/local-login-failure", (req, res) => {
-  res.sendStatus(403);
+  res.sendStatus(401);
 });
 
 router.get("/protected", require("../../middlewares/checkJWT"), (req, res, next) => {

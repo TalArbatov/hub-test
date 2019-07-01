@@ -8,11 +8,12 @@ const getHubs = async (req, res, next) => {
 };
 
 const createHub = async (req, res, next) => {
+    // 0. get hub object from db
+    const hubName = req.body;
     // 1. validate hub creating request
-    const hub = req.body;
-    const hubStatus = await hubService.validateHub(hub)
+    const hubStatus = await hubService.validateHub(hubName)
     if(!hubStatus.success)
-        return res.status(409).send(hubStatus.messages)
+        return res.status(400).send(hubStatus.messages)
     // 2. intialize a hub object from schema
     const newHub = hubService.initializeHub(hub, req.user)
     // 3. save hub to db
@@ -21,7 +22,7 @@ const createHub = async (req, res, next) => {
     console.log(savedHub)
     if(savedHub)
         return res.send(savedHub)
-    else return res.status(409).send(['Error while saving Hub'])
+    else return res.status(400).send(['Error while saving Hub'])
     
     
   }
@@ -37,7 +38,7 @@ const middleware = async (req, res, next) => {
   const currentHub = await Hub.findOne({ name: hubName })
     .populate("subscribers")
     .populate("admin");
-  if (!currentHub) return res.status(409).send("Cannot find specified Hub");
+  if (!currentHub) return res.status(400).send("Cannot find specified Hub");
   req.hub = currentHub;
   next();
 };
@@ -52,9 +53,9 @@ const subscribe = (req,res,next) => {
 
 const unsubscribe =  (req,res,next) => {
     if(hubService.isAdmin(req.hub.name, req.user))
-        return res.status(409).send('An admin cannot unsubscribe from his Hub')
+        return res.status(400).send('An admin cannot unsubscribe from his Hub')
     if(hubService.isModerator(req.hub.name, req.user))
-        return res.status(409).send('A moderator cannot unsubscribe from his Hub')
+        return res.status(400).send('A moderator cannot unsubscribe from his Hub')
 
     const hub = req.hub;
     const user = req.user;

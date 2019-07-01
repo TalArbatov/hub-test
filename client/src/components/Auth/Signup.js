@@ -7,11 +7,12 @@ const Signup = props => {
     password: ''
   })
 
-  const changeForm = (input, type) => {
-    setState({...getState, [type]: input})
+  const changeForm = (e) => {
+    setState({...getState, [e.target.name]: e.target.value})
   }
 
-  const onSubmit = () => {
+  const onSubmit = e => {
+    e.preventDefault()
     axios.post('/api/auth/local-signup', getState).then(res => {
       console.log(res.data)
     })
@@ -20,13 +21,15 @@ const Signup = props => {
   return(
     <div>
       <h1>Signup:</h1>
+      <form onSubmit={onSubmit}>
       <label>email:</label>
-      <input type='text' onChange={(e) => changeForm(e.target.value, 'email')}></input>
+      <input type='text' name='email' onChange={changeForm}></input>
 
       <label>password:</label>
-      <input type='password' onChange={(e) => changeForm(e.target.value, 'password')}></input>
+      <input type='password' name='password' onChange={changeForm}></input>
 
-      <button onClick={() => onSubmit()}>Submit</button>
+      <button type='submit'>Submit</button>
+      </form>
     </div>
   )
 }

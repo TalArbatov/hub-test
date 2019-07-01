@@ -7,17 +7,19 @@ const misc = require("./misc");
 const session = require("./session");
 const morgan = require("./morgan");
 const errorHandler = require("./errorHandler");
+const staticFallback = require('./staticFallback')
 const middlewares = [
   bodyParser,
+  static,
   cookieParser,
   session,
   morgan,
   misc,
   passport,
   router,
+  staticFallback,
   errorHandler,
-
-  static
+  
 ];
 
 const applyMiddlewares = app => {

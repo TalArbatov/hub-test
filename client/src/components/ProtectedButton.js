@@ -19,4 +19,8 @@ const ProtectedButton = props => {
     )
 }
 
+const mapStateToProps = state => {
+
+}
+
 export default ProtectedButton;

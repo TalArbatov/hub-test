@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const postController = require('../../controllers/post');
 const passport = require('passport');
 

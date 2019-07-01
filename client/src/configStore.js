@@ -1,22 +1,25 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
-import createHistory from 'history/createBrowserHistory';
-
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import {routerMiddleware, connectRouter} from 'connected-react-router';
 import authReducer from "./reducers/authReducer";
+import asyncMiddleware from './middlewares/asyncMiddleware'
 
-const history = createHistory();
+import {createBrowserHistory} from 'history';
 
-const configStore = () =>
+export const history = createBrowserHistory();
+
+
+// Build the middleware for intercepting and dispatching navigation actions
+const myRouterMiddleware = routerMiddleware(history);
+
+export const configStore = () =>
   createStore(
     combineReducers({
+      router: connectRouter(history),
       authReducer
     }),
-    compose(
-      applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+    composeWithDevTools(applyMiddleware(thunk, myRouterMiddleware))
   );
 
 
-
-export configStore;

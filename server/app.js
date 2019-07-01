@@ -8,7 +8,7 @@ const http = require('http')
 
 //setup mongodb connection via mongoose ORM
 mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
-  if(err) console.log(`Failed to connect to ${config.mongoURI}, Error message: ${err}`)
+  if(err) {}//console.log(`Failed to connect to ${config.mongoURI}, Error message: ${err}`)
   else console.log(`Sucessfully connected to ${config.mongoURI}`)
 })
 
@@ -34,6 +34,7 @@ applyMiddlewares(app);
 const PORT = config.port;
 
 app.set('port', PORT);
+
 
 
 module.exports = app;

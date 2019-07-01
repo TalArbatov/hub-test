@@ -20,9 +20,11 @@ const getPost = async (req,res,next) => {
 
 const submitPost = async (req,res,next) => {
     const hubName = req.params.hub;
-    const user = req.params;
+    const user = req.user;
     const canUserPost = await postService.canUserPost(hubName, user);
-    res.send(canUserPost)
+    if(!canUserPost)
+        res.sendStatus(403)
+    
 }
 
 

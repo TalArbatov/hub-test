@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
-import {SubmitButton, SubmitDiv } from '../styles'
+import { SubmitDiv } from '../styles'
+import SubmitButton from '../../../styles/SubmtiButton';
 const SignupForm = props => {
   const { classes } = props;
 

@@ -79,9 +79,10 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 const Window = styled.div`
+background: white;
   padding:25px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid purple;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -103,26 +104,6 @@ a {
 }
 `
 
-const SubmitButton = styled.button`
-  cursor:pointer;
-  height:30px;
-  border-radius:20px;
-  background:white;
-  color:#1ECD97;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:4px 20px; 
-  margin:10px;
-  font-family:Gisha;
-  border: 2px solid #1ECD97;
-  transition:0.3s;
-  &:hover {
-    background: #1ECD97;
-    color: white;
-
-  }
-`
 
 
 export {
@@ -132,6 +113,5 @@ export {
     LoginTitle,
     Wrapper,
     Window,
-    SubmitButton,
     SubmitDiv
 }

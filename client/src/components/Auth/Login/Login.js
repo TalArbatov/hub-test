@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import utils from "../../../utils";
 import { LoginTitle, Window, Wrapper } from "../styles";
 import FacebookComponent from "./FacebookComponent";
 import GoogleComponent from "./GoogleComponent";

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
+import SubmitButton from '../../../styles/SubmtiButton';
 
 const SubmitDiv = styled.div`
 dispay:flex;
@@ -15,25 +16,25 @@ a {
 }
 `;
 
-const SubmitButton = styled.button`
-  cursor: pointer;
-  height: 30px;
-  border-radius: 20px;
-  background: white;
-  color: #1ecd97;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 20px;
-  margin: 10px;
-  font-family: Gisha;
-  border: 2px solid #1ecd97;
-  transition: 0.3s;
-  &:hover {
-    background: #1ecd97;
-    color: white;
-  }
-`;
+// const SubmitButton = styled.button`
+//   cursor: pointer;
+//   height: 30px;
+//   border-radius: 20px;
+//   background: white;
+//   color: #1ecd97;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 4px 20px;
+//   margin: 10px;
+//   font-family: Gisha;
+//   border: 2px solid #1ecd97;
+//   transition: 0.3s;
+//   &:hover {
+//     background: #1ecd97;
+//     color: white;
+//   }
+// `;
 
 const LocalForm = props => {
   const { classes } = props;

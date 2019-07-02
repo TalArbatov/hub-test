@@ -8,6 +8,8 @@ const defaultState = {
 
 const authReducer = (state = defaultState, action) => {
   switch(action.type) {
+    case TYPES.LOGOUT:
+        return {...state, authenticated: false, user: {}}
     case TYPES.LOCAL_LOGIN_REQUEST:
       return {...state, isLoading: true}
     case TYPES.LOCAL_LOGIN_ERROR:

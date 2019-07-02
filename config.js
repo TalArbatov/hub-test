@@ -5,7 +5,7 @@ module.exports = {
   port: process.env.PORT || 3000,
   mongoURI: process.env.MONGO_URI,
   sessionSecret: this.isPorduction ? process.env.SESSION_SECRET : 'session secret',
-  JWTsecret: this.isPorduction ? process.env.JWT_SECRET : 'jwt secret',
+  JWTsecret: this.isPorduction ? process.env.JWT_SECRET : 'secret',
   JWTexp: 60 * 60 * 24, //one day
   facebook: {
     clientID: process.env.FACEBOOK_CLIENT_ID,

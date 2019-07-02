@@ -15,8 +15,9 @@ const localLoginSuccess = (req, res, next) => {
 
 const localSignup = async (req,res,next) => {
     const form = req.body;
-    const existingUser = await authService.getUserByEmail(form.email)
-    const isValidForm = await authService.validateSignupForm(form, existingUser);
+    const conflict1 = await authService.getUserByEmail(form.email)
+    const conflict2 = await authService.getUserByUsername(form.username)
+    const isValidForm = await authService.validateSignupForm(form, conflict1, conflict2);
     if(!isValidForm.success)
         return res.status(400).send(isValidForm.messages)
     const initUser = authService.initializeUser(form);

@@ -18,14 +18,20 @@ const Login = props => {
   });
 
   const changeForm = e => {
+    //props.push('/test')
     setState({ ...getState, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async e => {
     e.preventDefault();
     const response = await props.login(getState);
-    if(response)
-      setState({...getState, response})
+    console.log(response)
+    if(!response.success)
+      setState({...getState, response: response.message})
+    else {
+      setState({...getState, response: ''})
+      props.push('/after-login')
+    }
   };
 
   const facebookResponse = response => {
@@ -67,11 +73,6 @@ const Login = props => {
         <div>
           <p>Don't have an account? <Link to='/signup'>Signup!</Link></p>
         </div>
-        <button
-        onClick={() => {
-        props.push("/after-login");
-        }}
-      />
 
       </Window>
     </Wrapper>
@@ -87,7 +88,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     login: (form) => dispatch(login(form)),
-    push: () => dispatch(push())
+    push: (path) => dispatch(push(path))
   }
 }
 

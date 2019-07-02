@@ -14,9 +14,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: Gisha;
   }
 `
-
 const store = configStore();
-console.log(store.getState());
+
+//console.log(store.getState());
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
@@ -26,3 +27,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
+
+export default store;

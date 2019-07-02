@@ -11,22 +11,24 @@ router.get("/test", (req, res, next) => {
   res.send("API response from Express server");
 });
 
-router.post(
-  "/local-signup",
-  passport.authenticate("local-signup", {
-    successRedirect: "/api/auth/local-signup-success",
-    failureRedirect: "/api/auth/local-signup-failure",
-    failureFlash: true
-  })
-);
 
-router.get("/local-signup-failure", (req, res, next) => {
-  res.status(400).send(req.flash("error")[0]);
-});
 
-router.get("/local-signup-success", (req, res, next) => {
-  res.send("success!");
-});
+// router.post(
+//   "/local-signup",
+//   passport.authenticate("local-signup", {
+//     successRedirect: "/api/auth/local-signup-success",
+//     failureRedirect: "/api/auth/local-signup-failure",
+//     failureFlash: true
+//   })
+// );
+
+// router.get("/local-signup-failure", (req, res, next) => {
+//   res.status(400).send(req.flash("error")[0]);
+// });
+
+// router.get("/local-signup-success", (req, res, next) => {
+//   res.send("success!");
+// });
 
 router.post(
   "/local-login",
@@ -124,22 +126,21 @@ router.get("/google-token", (req, res) => {
 
 router.get("/me/from/token", (req, res, next) => {
   const tokenHeader = req.headers["x-access-token"] || req.headers["authorization"];
-  if (!tokenHeader) res.sendStatus(401);
-
+  if (!tokenHeader) return res.sendStatus(401);
   const token = tokenHeader.split(" ")[1];
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
-      res.sendStatus(401);
+      return res.sendStatus(401);
     } else {
       User.findById(decoded._id, (err, user) => {
-        if (err) res.sendStatus(401);
+        if (err) return res.sendStatus(401);
 
         const cleanUser = {
           _id: user._id
         };
         //sends a new, refreshed token
         jwt.sign(cleanUser, secret, { expiresIn: 60 * 30 }, (err, token) => {
-          if (err) res.sendStatus(401);
+          if (err) return res.sendStatus(401);
           else res.send({ token, user });
         });
       });

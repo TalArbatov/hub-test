@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Signup from "./Auth/Signup";
+import Signup from "./Auth/Signup/Signup";
 
 import ProtectedButton from "./ProtectedButton";
 //import utils from "../utils";

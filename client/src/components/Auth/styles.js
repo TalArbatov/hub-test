@@ -103,7 +103,7 @@ a {
 }
 `
 
-const SubmitButton = styled.div`
+const SubmitButton = styled.button`
   cursor:pointer;
   height:30px;
   border-radius:20px;

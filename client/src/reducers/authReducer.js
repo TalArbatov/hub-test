@@ -1,4 +1,4 @@
-import * as TYPES from '../actions/actionTypes';
+import * as TYPES from '../constants/actionTypes';
 
 const defaultState = {
   isLoading: false,

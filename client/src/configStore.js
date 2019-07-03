@@ -2,9 +2,11 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import {routerMiddleware, connectRouter} from 'connected-react-router';
+//reducers
 import authReducer from "./reducers/authReducer";
-import asyncMiddleware from './middlewares/asyncMiddleware'
+import modalReducer from './reducers/modalReducer';
 
+import asyncMiddleware from './middlewares/asyncMiddleware'
 import {createBrowserHistory} from 'history';
 
 export const history = createBrowserHistory();
@@ -17,7 +19,8 @@ export const configStore = () =>
   createStore(
     combineReducers({
       router: connectRouter(history),
-      authReducer
+      authReducer,
+      modalReducer
     }),
     composeWithDevTools(applyMiddleware(thunk, myRouterMiddleware))
   );

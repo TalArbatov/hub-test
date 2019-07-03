@@ -4,6 +4,9 @@ const colors = {
 }
 
 const theme = {
+    window: {
+        borderRadius: '10px'
+    },
     colors: {
         primary: colors.primary,
         primaryHover: colors.primaryHover

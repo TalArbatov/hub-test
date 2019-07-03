@@ -7,6 +7,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { Route, Switch } from "react-router-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import theme from "./utils/theme";
+import RootModal from './modals/RootModal';
 
 const GlobalStyle = createGlobalStyle`
   body {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { SubmitDiv } from '../styles'
-import SubmitButton from '../../../styles/SubmtiButton';
+import SubmitButton from '../../../styles/SubmitButton';
 const SignupForm = props => {
   const { classes } = props;
 

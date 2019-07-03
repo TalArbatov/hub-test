@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import LoginContainer from "../containers/LoginContainer";
 import SignupContainer from '../containers/SignupContainer'
 import TempProfileImage from "./TempProfileImage";
+import RootModal from '../modals/RootModal';
 
 class App extends React.Component {
   componentDidMount() {
@@ -22,6 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+                <RootModal />
+
         <Navbar />
         <Switch>
           

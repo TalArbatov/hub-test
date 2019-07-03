@@ -81,7 +81,8 @@ const Wrapper = styled.div`
 const Window = styled.div`
 background: white;
   padding:25px;
-  border-radius: 10px;
+  border-radius: ${props => props.theme.window.borderRadius};
+  width:290px;
   border: 1px solid purple;
   display:flex;
   flex-direction:column;

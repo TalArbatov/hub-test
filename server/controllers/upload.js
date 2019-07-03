@@ -10,7 +10,8 @@ const s3 = new AWS.S3({
     signatureVersion: 'v4',
     region: 'eu-west-2'
 })
-//image key secure stracture : userID / <random character string>.<file extention> 
+
+//image key secure stracture: userID / <random character string>.<file extention> 
 
 module.exports = {
 

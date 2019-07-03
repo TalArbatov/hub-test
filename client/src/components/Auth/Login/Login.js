@@ -61,7 +61,6 @@ const Login = props => {
     console.log(test);
   };
   return (
-    <Wrapper>
       <Window>
         <div>
           <LoginTitle>Login</LoginTitle>
@@ -74,7 +73,7 @@ const Login = props => {
         </div>
 
       </Window>
-    </Wrapper>
+
   );
 };
 

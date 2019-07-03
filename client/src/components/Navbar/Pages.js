@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom'
 const pageState = [
     {
-        path: '/test1',
+        path: '/',
         text: 'Test1'
     },
     {

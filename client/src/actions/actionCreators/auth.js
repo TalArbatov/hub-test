@@ -1,6 +1,6 @@
 import axios from "axios";
 import setAuthorizationToken from "../../utils/setAuthorizationToken";
-import * as TYPES from "../actionTypes";
+import * as TYPES from "../../constants/actionTypes";
 import { push } from "connected-react-router";
 
 export const login = form => {

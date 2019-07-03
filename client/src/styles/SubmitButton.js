@@ -16,7 +16,7 @@ const SubmitButton = styled.button`
   font-family:Gisha;
   border: 2px solid #1ECD97;
   transition:0.3s;
-  width: ${props => props.theme.width ? props.theme.width : 'auto'}
+  width: ${props => props.theme.width ? props.theme.width : '100%'}
   &:hover {
     background: #1ECD97;
     color: white;

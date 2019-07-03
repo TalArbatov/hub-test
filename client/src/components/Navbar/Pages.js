@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const pageState = [
     {
         path: '/',
-        text: 'Test1'
+        text: 'Dashboard'
     },
     {
         path: '/h/myHub',

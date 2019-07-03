@@ -1,31 +1,31 @@
-const config = require('../config')
-const express = require('express');
-const mongoose = require('mongoose');
-const passport =require('passport')
+const config = require("../config");
+const express = require("express");
+const mongoose = require("mongoose");
+const passport = require("passport");
 const app = express();
-const https = require('https');
-const http = require('http')
+const https = require("https");
+const http = require("http");
 
 //setup mongodb connection via mongoose ORM
-mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
-  if(err) {}//console.log(`Failed to connect to ${config.mongoURI}, Error message: ${err}`)
-  else console.log(`Sucessfully connected to ${config.mongoURI}`)
-})
+mongoose.connect(config.mongoURI, { useNewUrlParser: true }, err => {
+  if (err) {
+  } //console.log(`Failed to connect to ${config.mongoURI}, Error message: ${err}`)
+  else console.log(`Sucessfully connected to ${config.mongoURI}`);
+});
 
-require('./models/UserSchema');
-require('./models/HubSchema');
-require('./models/PostSchema');
+require("./models/UserSchema");
+require("./models/HubSchema");
+require("./models/PostSchema");
 
+require("./passport/facebook-login");
+require("./passport/google-login");
 
-require('./passport/facebook-login')
-require('./passport/google-login')
+require("./passport/local-signup");
+require("./passport/local-login");
+require("./passport/jwt");
+require("./passport/anonymous");
 
-require('./passport/local-signup');
-require('./passport/local-login')
-require('./passport/jwt')
-
-
-const applyMiddlewares = require('./middlewares');
+const applyMiddlewares = require("./middlewares");
 
 applyMiddlewares(app);
 
@@ -33,12 +33,8 @@ applyMiddlewares(app);
 
 const PORT = config.port;
 
-app.set('port', PORT);
-
-
+app.set("port", PORT);
 
 module.exports = app;
 
 //app.listen()
-
-

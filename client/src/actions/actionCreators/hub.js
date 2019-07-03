@@ -1,6 +1,7 @@
 import * as TYPES from '../../constants/actionTypes';
 import axios from 'axios';
 import { push } from 'connected-react-router';
+import { TemporaryCredentials } from 'aws-sdk';
 
 export const fetchHub = name => {
     return dispatch => {
@@ -54,4 +55,48 @@ export const createHub = (form) => {
                 return {success: false, messages: err.response.data};
         })
     }
+}
+
+
+export const subscribe = hubName => {
+    return dispatch => {
+        dispatch(subscribeRequest);
+        return axios.get(`/api/h/${hubName}/subscribe`).then(res => {
+            console.log(res)
+            dispatch(subscribeSuccess)
+        }).catch(err => {
+            console.log(err.response)
+            dispatch(subscribeError)
+        })
+    }
+}
+export const unsubscribe = hubName => {
+    return dispatch => {
+        dispatch(unsubscribeRequest)
+        return axios.get(`/api/h/${hubName}/unsubscribe`).then(res => {
+            console.log(res)
+            dispatch(unsubscribeSuccess)
+        }).catch(err => {
+            console.log(err.response)
+            dispatch(unsubscribeError)
+        })
+    }
+}
+const subscribeRequest = {
+    type: TYPES.SUBSCRIBE_REQUEST
+}
+const subscribeError = {
+    type: TYPES.SUBSCRIBE_ERROR
+}
+const subscribeSuccess = {
+    type: TYPES.SUBSCRIBE_SUCCESS
+}
+const unsubscribeRequest = {
+    type: TYPES.UNSUBSCRIBE_REQUEST
+}
+const unsubscribeError = {
+    type: TYPES.UNSUBSCRIBE_ERROR
+}
+const unsubscribeSuccess = {
+    type: TYPES.UNSUBSCRIBE_SUCCESS
 }

@@ -39,12 +39,12 @@ router.get("/", hubController.getHubs);
 router.post("/", passport.authenticate("jwt"), hubController.createHub);
 
 // get specific hub by name
-router.get("/:hub", hubController.middleware, hubController.getHub);
+router.get("/:hub", passport.authenticate(['jwt', 'anonymous']), hubController.getHub);
 
 
 // subscribe to hub
-router.get('/:hub/subscribe',passport.authenticate('jwt'), hubController.middleware,  hubController.subscribe)
+router.get('/:hub/subscribe',passport.authenticate('jwt'),  hubController.subscribe)
 
 // unsubsribe to hub
-router.get('/:hub/unsubscribe',passport.authenticate('jwt'), hubController.middleware, hubController.unsubscribe)
+router.get('/:hub/unsubscribe',passport.authenticate('jwt'), hubController.unsubscribe)
 module.exports = router;

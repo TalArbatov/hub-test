@@ -2,14 +2,31 @@ const Hub = require("mongoose").model("Hub");
 const swearjar = require("swearjar");
 
 const getHubByName = async hubName => {
-    try{
-    const hub = await Hub.findOne({name: hubName});
-        return hub;
-    }
-    catch(e) {
-        return null;
-    }
-}
+  try {
+    const hub = await Hub.findOne({ name: hubName });
+    return hub;
+  } catch (e) {
+    return null;
+  }
+};
+
+const modifyHubToUser = (hub, user) => {
+  const newHub = {...hub.toObject()};
+  // if user logged out
+  if( user === undefined) {
+    newHub.isSubscribed = false;
+    // TODO: add more modifications
+    return newHub;
+  }
+    
+  console.log('hub')
+  console.log(newHub);
+  console.log('user');
+  console.log(user)
+  newHub.isSubscribed = isSubscriber(newHub, user);
+  // TODO: add more modification
+  return newHub;
+};
 
 const validateHub = async hub => {
   const { name, description, privacy } = hub;
@@ -74,27 +91,21 @@ const saveHub = async hub => {
   return savedHub;
 };
 
-const isModerator = async (hubName, user) => {
-  const hub = await Hub.findOne({ name: hubName });
-  if (!hub) return false;
+const isModerator = (hub, user) => {
   const moderator = hub.moderators.find(moderatorID => {
     return moderatorID.equals(user._id);
   });
   if (moderator) return true;
   return false;
 };
-const isSubscriber = async (hubName, user) => {
-  const hub = await Hub.findOne({ name: hubName });
-  if (!hub) return false;
+const isSubscriber = (hub, user) => {
   const subscriber = hub.subscribers.find(subscriberID => {
     return subscriberID.equals(user._id);
   });
   if (subscriber) return true;
   return false;
 };
-const isAdmin = async (hubName, user) => {
-  const hub = await Hub.findOne({ name: hubName });
-  if (!hub) return false;
+const isAdmin = (hub, user) => {
   if (hub.admin.equals(user._id)) {
     return true;
   } else {
@@ -103,11 +114,13 @@ const isAdmin = async (hubName, user) => {
 };
 
 module.exports = {
-getHubByName,
+  getHubByName,
   validateHub,
+
   initializeHub,
   saveHub,
   isSubscriber,
   isModerator,
-  isAdmin
+  isAdmin,
+  modifyHubToUser
 };

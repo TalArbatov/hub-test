@@ -41,7 +41,7 @@ const HubContainer = props => {
 
         </MainWindowTemplate>
         <SideWindowTemplate>
-            <Window>
+            <Window theme={{height: 'auto'}}>
                 <HubHeaderWindow name={hub.name} description={hub.description}></HubHeaderWindow>
             </Window>
             <Window>

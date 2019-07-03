@@ -36,7 +36,7 @@ const RootModal = props => {
       transform: "translate(-50%, -50%)",
       borderRadius: theme.window.borderRadius,
       maxWidth: "600px",
-      width: "90%",
+      width: "fit-content",
       //border-left: 5px solid ${props => props.theme.colors.primary};
       borderLeft: modalProps.bookmark ? `5px solid ${theme.colors.primary}` : 'none'
     }

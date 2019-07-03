@@ -1,3 +1,7 @@
+//commonReducer
+
+
+
 //authRducer
 
 export const LOCAL_LOGIN_REQUEST = 'LOCAL_LOGIN_REQUEST'
@@ -11,7 +15,15 @@ export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const LOGOUT = 'LOGOUT'
 
 //hubReducer 
+export const FETCH_HUBS = 'FETCH_HUBS'
 
+export const FETCH_HUB_REQUEST = 'FETCH_HUB_REQUEST';
+export const FETCH_HUB_SUCCESS = 'FETCH_HUB_SUCCESS';
+export const FETCH_HUB_ERROR = 'FETCH_HUB_ERROR';
+
+export const CREATE_HUB_REQUEST = 'CREATE_HUB_REQUEST'
+export const CREATE_HUB_SUCCESS = 'CREATE_HUB_SUCCESS'
+export const CREATE_HUB_ERROR = 'CREATE_HUB_ERROR'
 
 //modalRducer
 

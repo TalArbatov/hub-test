@@ -7,8 +7,8 @@ const pageState = [
         text: 'Test1'
     },
     {
-        path: '/test2',
-        text: 'Test2'
+        path: '/h/myHub',
+        text: 'myHub'
     },
     {
         path: '/test3',

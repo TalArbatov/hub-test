@@ -5,6 +5,7 @@ const applyMiddleware = app => {
     app.get('/*', (req,res) => {
         res.sendFile(require('path').join(publicPath, 'index.html'))
     })
+    
 return app;    
 }
 

@@ -76,7 +76,8 @@ const styles = {
     margin: "3px"
   },
   submitButton: {
-    margin: "10px"
+    margin: "10px",
+    
   }
 };
 

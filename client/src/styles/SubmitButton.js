@@ -12,6 +12,7 @@ const SubmitButton = styled.button`
   align-items:center;
   padding:4px 20px; 
   margin:0;
+  height: 40px;
   font-family:Gisha;
   border: 2px solid #1ECD97;
   transition:0.3s;

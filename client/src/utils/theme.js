@@ -5,7 +5,11 @@ const colors = {
 
 const theme = {
     window: {
-        borderRadius: '10px'
+        borderRadius: '10px',
+        header: {
+            color: 'black',
+            fontSize: '0.8em'
+        }
     },
     colors: {
         primary: colors.primary,

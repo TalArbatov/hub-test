@@ -9,9 +9,10 @@ const getHubs = async (req, res, next) => {
 
 const createHub = async (req, res, next) => {
     // 0. get hub object from db
-    const hubName = req.body;
+    console.log(req.body)
+    const hub = req.body;
     // 1. validate hub creating request
-    const hubStatus = await hubService.validateHub(hubName)
+    const hubStatus = await hubService.validateHub(hub)
     if(!hubStatus.success)
         return res.status(400).send(hubStatus.messages)
     // 2. intialize a hub object from schema
